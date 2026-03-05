@@ -1,7 +1,12 @@
-# app/models.py
+
 
 from sqlalchemy import Column, Integer, String, Float, ForeignKey
 from sqlalchemy.orm import relationship
+from sqlalchemy import Column, Integer
+from sqlalchemy import Column, Integer, String
+from .database import Base
+
+
 from .database import Base
 
 
@@ -12,7 +17,7 @@ class Customer(Base):
     name = Column(String, index=True)
     email = Column(String, unique=True, index=True)
 
-    # ✅ ADD THIS
+    
     sales = relationship("Sale", back_populates="customer")
 
 
@@ -38,10 +43,14 @@ class Sale(Base):
     product = relationship("Product", back_populates="sales")
 
 
+
+
+
+ 
 class User(Base):
     __tablename__ = "users"
 
     id = Column(Integer, primary_key=True, index=True)
-    name = Column(String, nullable=False)
-    email = Column(String, unique=True, index=True, nullable=False)
-    password = Column(String, nullable=False)
+    username = Column(String)
+    email = Column(String, unique=True)
+    password = Column(String)
